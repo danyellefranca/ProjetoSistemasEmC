@@ -40,7 +40,31 @@ int main()
        int itemDaDiagonal = matriz[i][i];
        for (int j = 0; j < numColunas; j++)
        {
+           matriz[i][j] = (matriz[i][j] / itemDaDiagonal);
            linhaAtual[j] = (matriz[i][j] / itemDaDiagonal);
+       }
+       
+       for (int l = 0; l < numLinhas; l++)
+       {
+           if (l != i) // não vamos fazer isso com o elemento da diagonal principal, pois acabamos de tornar ele 1
+           {
+               int numeroQueQueroTornarZero = matriz[l][i];
+               int oposto = -(numeroQueQueroTornarZero);
+               for (int a = 0; a < numColunas; a++)
+               {
+                   matriz[l][a] = matriz[l][a] + (linhaAtual[a] * oposto);
+               }
+           }
+           
+       }
+       
+   }
+   
+   for (int y = 0; y < numLinhas; y++)
+   {
+       for (int d = 0; d < numColunas; d++)
+       {
+           printf("Matriz[%d][%d] = %d\n", y, d, matriz[y][d]);
        }
    }
    
