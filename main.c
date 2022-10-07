@@ -18,14 +18,6 @@ int main(int argc,char *argv[])
     //abre o arquivo
     fp = fopen(fname, "r");
 
-    //declaramos variaveis que vamos precisar
-    int quantLinhas = 0;
-    char sistema[80];
-    char incognitas[50];
-    char numeros[50];
-    char resultado[50];
-    char matriz;
-
     //se o arquivo for nulo manda mensagem de erro
     if (fp == NULL)
     {
@@ -34,9 +26,19 @@ int main(int argc,char *argv[])
     }
     else
     {
+        //declaramos as variaveis que vamos precisar
+        int linha[300];
+        char sistema[300];
+        char incognitas[50];
+        char numeros[50];
+        char resultado[50];
+        char matriz;
 
+        while(gets(linha), sizeof(linha), fp != NULL)
+        {
+            //
+        }
     }
-
 
  return 0;
 }
