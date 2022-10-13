@@ -104,6 +104,19 @@ void printarMatriz(int numLinhas, int numColunas, float matriz[numLinhas][numCol
     }
 }
 
+float determinante(int ordem, float** matriz)
+{
+    float determinante;
+    // se a matriz for 1x1, o determinante é o único elemento da matriz
+    if (ordem == 1)
+        determinante = **matriz;
+    else
+
+
+}
+
+
+/*
 void resultado(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
 {
     int linhas, colunas;
@@ -116,21 +129,13 @@ void resultado(int numLinhas, int numColunas, float matriz[numLinhas][numColunas
         return NULL;
 }
 
-float determinante(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
-{
-    float determinante;
-    // se a matriz for 1x1, o determinante é o único elemento da matriz
-    if (numLinhas == 1 && numColunas == 1)
-        determinante = matriz[0][0];
-    else
-    // parei aqui que delicia que sabor que vontadezinha de morre me mata hmmm
 
-}
 
 void cofator(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
 {
 
 }
+*/
 
 void tirarZeros(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
 {
