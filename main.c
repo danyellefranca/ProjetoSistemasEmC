@@ -8,7 +8,7 @@ int main(int argc,char *argv[])
     //declara o ponteiro que vai apontar para o arquivo a ser lido
     //define o maximo de caracteres a ser digitado como caminho do arquivo
     char fname[100];
-    FILE* fp;
+    FILE* arq;
     memset(fname, 0, 100);
 
     //pede pro usuário digitar o nome do arquivo
@@ -16,28 +16,40 @@ int main(int argc,char *argv[])
     gets(fname);
 
     //abre o arquivo
-    fp = fopen(fname, "r");
+    arq = fopen(fname, "r");
 
     //se o arquivo for nulo manda mensagem de erro
-    if (fp == NULL)
+    if (arq == NULL)
     {
         printf("\nErro ao abrir o arquivo!\n");
-        fclose(fp);
+        fclose(arq);
     }
     else
     {
-        //declaramos as variaveis que vamos precisar
-        int linha[300];
-        char sistema[300];
-        char incognitas[50];
-        char numeros[50];
+        char sistema[200];
+        char incognitas[30];
+        char coeficientes[300];
         char resultado[50];
-        char matriz;
+        // para ler uma linha
+        int ordem;
+        fscanf(arq,"%d",&ordem);
 
-        while(gets(linha), sizeof(linha), fp != NULL)
-        {
-            //
-        }
+        int quantasLinhas = ordem;
+
+        int i = quantasLinhas;
+        int j = quantasLinhas + 1;
+
+        char matriz[i][j];
+
+
+        // agora ler linha por linha e guardar sistemas em um vetor
+        // depois de ler uma linha (acho que while)
+        // pegar o que tá nesse vetor sistemas e dividir em outros dois vetores:
+        // coeficientes e incoignitas
+
+
+            // quantasLinhas++ pra mudar de linha
+            // fazer um for pra montar a matriz
     }
 
  return 0;
