@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc,char *argv[])
 {
@@ -26,31 +27,76 @@ int main(int argc,char *argv[])
     }
     else
     {
-        char sistema[200];
+        char linha;
+        # char sistema[200];
         char incognitas[30];
         char coeficientes[300];
         char resultado[50];
-        // para ler uma linha
+
+        // para ler a primeira linha linha
         int ordem;
         fscanf(arq,"%d",&ordem);
 
         int quantasLinhas = ordem;
 
         int i = quantasLinhas;
-        int j = quantasLinhas + 1;
+        int jcoluna = quantasLinhas + 1;
 
         char matriz[i][j];
 
+        int qualLinha = 0; // contador
 
-        // agora ler linha por linha e guardar sistemas em um vetor
-        // depois de ler uma linha (acho que while)
-        // pegar o que tá nesse vetor sistemas e dividir em outros dois vetores:
-        // coeficientes e incoignitas
+        // lê o conteudo da linha e coloca no vetor sistema
+
+        char *sistema[ordem];
+
+        int indiceIndice = 0;
 
 
-            // quantasLinhas++ pra mudar de linha
-            // fazer um for pra montar a matriz
+        // eof ==> end of file
+        while (!arq.eof())
+        {
+            fscanf(arq,"%d",&linha);
+            sistema[indiceIndice++] = linha;
+
+        }
+
+
+        // lê linha por linha e guardar sistemas em um vetor
+        // pegar o que tá nesse vetor sistemas e divide os coeficientes
+
+        int indiceCoef = 0;
+
+        for (i = 0; i < ordem; i++)
+        {
+            char *token = strtok(sistema[i], " ");
+
+             while (token != NULL) {
+              coeficientes[indiceCoef++] = token;
+
+              printf(" %s\n", token);
+
+              token = strtok(NULL, " ");
+           }
+
+           indiceCoef = 0;
+
+        }
+
+
+            // montar a matriz
+
+
+            // PRINTAR MATRIZ:
+            for ( i=0; i<ordem; i++ )
+            {
+                for ( k=0; k<jcoluna; k++ )
+                {
+                    printf ("%d", matriz[ i ][ j ]);
+                }
+            }
     }
+    fclose(arq);
 
  return 0;
 }
