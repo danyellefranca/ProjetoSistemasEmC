@@ -23,10 +23,10 @@ void trocarColunas(int a, int b, int numLinhas, int numColunas, float matriz[num
 void tirarZeros(int numLinhas, int numColunas, float matriz[numLinhas][numColunas]);
 
 // retorna o determinante da matriz passada como parâmetro
-float determinante (int numLinhas, int numColunas, float matriz[numLinhas][numColunas]);
+float determinante(int ordem, float matriz[ordem][ordem]);
 
-// determina o cofator da matriz passada como parâmetro
-void cofator();
+// determina o cofator do elemento matriz[linElem][colElem], colocando ele dentro de cofatores
+void cofator(int ordem, float matriz[ordem][ordem], float cofator[ordem][ordem], int linElem, int colElem);
 
 // POR ENQUANTO não tá retornando nada, mas vai retornar o valor das incognitas
 void resultado(int numLinhas, int numColunas, float matriz[numLinhas][numColunas]);
@@ -37,9 +37,20 @@ void printarMatriz(int numLinhas, int numColunas, float matriz[numLinhas][numCol
 int main()
 {
     int linha, coluna;
-    const int numLinhas = 3, numColunas = 4; // numero de linhas e de colunas
-    float matriz[numLinhas][numColunas];     // matriz teste
+    const int numLinhas = 3, numColunas = 3; // numero de linhas e de colunas
+    float matriz[numLinhas][numColunas]; // matriz teste
 
+    matriz[0][0] = 1.0;
+    matriz[0][1] = 2.0;
+    matriz[0][2] = 3.0;
+    matriz[1][0] = 4.0;
+    matriz[1][1] = 5.0;
+    matriz[1][2] = 6.0;
+    matriz[2][0] = 7.0;
+    matriz[2][1] = 8.0;
+    matriz[2][2] = 9.0;
+
+    /*
     // preenchendo a matriz teste
     // primeira linha
     matriz[0][0] = 0.0;
@@ -76,7 +87,12 @@ int main()
     matriz[4][3] = 10.0;
     matriz[4][4] =  0.0;
     matriz[4][5] =  5.0;
+    */
     printarMatriz(numLinhas, numColunas, matriz);
+
+    float det = determinante(numLinhas, matriz);
+
+    printf("\nDeterminante da matriz é: %.0f", det);
 
     // printf("Calculadora de sistemas lineares determinados")
     /*
@@ -87,6 +103,7 @@ int main()
     else
         printf("Não foi possível resolver esse sistema! Ele é impossível ou possível e indeterminado.");
     */
+
 
     return 0;
 }
@@ -104,6 +121,7 @@ void printarMatriz(int numLinhas, int numColunas, float matriz[numLinhas][numCol
     }
 }
 
+/*
 void resultado(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
 {
     int linhas, colunas;
@@ -114,22 +132,64 @@ void resultado(int numLinhas, int numColunas, float matriz[numLinhas][numColunas
     }
     else
         return NULL;
-}
+}*/
 
-float determinante(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
+float determinante(int ordem, float matriz[ordem][ordem])
 {
-    float determinante;
+    int sinal, i, j;
+    float det, cofatorTemp[ordem][ordem];
     // se a matriz for 1x1, o determinante é o único elemento da matriz
-    if (numLinhas == 1 && numColunas == 1)
-        determinante = matriz[0][0];
+    if (ordem == 1)
+        det = matriz[0][0];
     else
-    // parei aqui que delicia que sabor que vontadezinha de morre me mata hmmm
+    {
+        sinal = 1; // sinal positivo
 
+        // percorrendo colunas
+        for (j = 0; j < ordem; j++)
+        {
+            // vamos usar a linha 1 para achar o determinante pelo método de laplace
+            // para isso, vamos pegar o cofator do elemento da matriz que está na
+            // linha escolhida (0) e na coluna j
+            cofator(ordem, matriz, cofatorTemp, 0, j);
+            det += sinal * matriz[0][j] * determinante(ordem - 1, cofatorTemp);
+
+
+            sinal = -sinal;
+        }
+    }
+
+    return det;
 }
 
-void cofator(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
+void cofator(int ordem, float matriz[ordem][ordem], float cofatorTemp[ordem][ordem], int linElem, int colElem)
 {
+     int i = 0, j = 0, linha, coluna;
 
+    // percorrendo toda a matriz
+    for (linha = 0; linha < ordem; linha++)
+    {
+        for (coluna = 0; coluna < ordem; coluna++)
+        {
+            // passando para a matriz cofator todos os elementos
+            // que NÃO estão na linha e na coluna do elemento
+            // do qual estamos fazendo o cofator, ou seja,
+            // todos os elementos que não estão na linha linElem
+            // e na coluna colElem
+            if (linha != linElem && coluna != colElem)
+            {
+                cofatorTemp[i][j++] = matriz[linha][coluna];
+
+                // preenchemos uma linha, então aumentamos o
+                // indice de linha e resetamos o indice de coluna
+                if (j == ordem - 1)
+                {
+                    j = 0;
+                    i++;
+                }
+            }
+        }
+    }
 }
 
 void tirarZeros(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
