@@ -53,7 +53,7 @@ int main(int argc,char *argv[])
 
         // eof ==> end of file
         /*
-        while (linha =! eof())
+        while (!fp-->eof())
         {
             fscanf(arq,"%d",&linha);
             sistema[indiceIndice++] = linha;
