@@ -37,18 +37,25 @@ void printarMatriz(int numLinhas, int numColunas, float matriz[numLinhas][numCol
 int main()
 {
     int linha, coluna;
-    const int numLinhas = 3, numColunas = 3; // numero de linhas e de colunas
+    const int numLinhas = 4, numColunas = 4; // numero de linhas e de colunas
     float matriz[numLinhas][numColunas]; // matriz teste
 
     matriz[0][0] = 1.0;
     matriz[0][1] = 2.0;
     matriz[0][2] = 3.0;
-    matriz[1][0] = 4.0;
-    matriz[1][1] = 5.0;
-    matriz[1][2] = 6.0;
-    matriz[2][0] = 7.0;
-    matriz[2][1] = 8.0;
-    matriz[2][2] = 9.0;
+    matriz[0][3] = -1.0;
+    matriz[1][0] = -1.0;
+    matriz[1][1] = 3.0;
+    matriz[1][2] = 0.0;
+    matriz[1][3] = 2.0;
+    matriz[2][0] = 0.0;
+    matriz[2][1] = 0.0;
+    matriz[2][2] = 0.0;
+    matriz[2][3] = 2.0;
+    matriz[3][0] = 4.0;
+    matriz[3][1] = 1.0;
+    matriz[3][2] = -2.0;
+    matriz[3][3] = 3.0;
 
     /*
     // preenchendo a matriz teste
@@ -92,7 +99,7 @@ int main()
 
     float det = determinante(numLinhas, matriz);
 
-    printf("\nDeterminante da matriz é: %.0f", det);
+    printf("\nDeterminante da matriz: %.0f", det);
 
     // printf("Calculadora de sistemas lineares determinados")
     /*
@@ -121,22 +128,9 @@ void printarMatriz(int numLinhas, int numColunas, float matriz[numLinhas][numCol
     }
 }
 
-/*
-void resultado(int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
-{
-    int linhas, colunas;
-
-    if (determinante(numLinhas, numColunas, matriz) != 0)
-    {
-
-    }
-    else
-        return NULL;
-}*/
-
 float determinante(int ordem, float matriz[ordem][ordem])
 {
-    int sinal, i, j;
+    int sinal, j;
     float det, cofatorTemp[ordem][ordem];
     // se a matriz for 1x1, o determinante é o único elemento da matriz
     if (ordem == 1)
@@ -161,7 +155,6 @@ float determinante(int ordem, float matriz[ordem][ordem])
 
     return det;
 }
-
 void cofator(int ordem, float matriz[ordem][ordem], float cofatorTemp[ordem][ordem], int linElem, int colElem)
 {
      int i = 0, j = 0, linha, coluna;
@@ -178,7 +171,8 @@ void cofator(int ordem, float matriz[ordem][ordem], float cofatorTemp[ordem][ord
             // e na coluna colElem
             if (linha != linElem && coluna != colElem)
             {
-                cofatorTemp[i][j++] = matriz[linha][coluna];
+                cofatorTemp[i][j] = matriz[linha][coluna];
+                j++;
 
                 // preenchemos uma linha, então aumentamos o
                 // indice de linha e resetamos o indice de coluna
