@@ -75,6 +75,7 @@ int main(int argc,char *argv[])
         // lê linha por linha e guardar sistemas em um vetor
         // pegar o que tá nesse vetor sistemas e divide os coeficientes
 
+        /*
         int indiceCoef = 0;
 
         for (int i = 0; i < ordem; i++)
@@ -91,6 +92,7 @@ int main(int argc,char *argv[])
            indiceCoef = 0;
 
         }
+        */
 
     }
     fclose(arq);
