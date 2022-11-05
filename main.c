@@ -70,10 +70,11 @@ int temEquacoesEquivalentes(int ordem, float matriz[ordem][ordem]);
 void trocarColunas(int a, int b, int numLinhas, int numColunas, float matriz[numLinhas][numColunas]);
 
 // funcao para tirar os zeros da diagonal principal
-void tirarZeros(int numLinhas, int numColunas, float matriz[numLinhas][numColunas]);
+int tirarZeros(int numLinhas, int numColunas, float matriz[numLinhas][numColunas]);
 
 int main(int argc, char *argv[])
 {
+
     printf("---RESOLUCAO DE SISTEMAS LINEARES---\n");
 
     //declara o ponteiro que vai apontar para o arquivo a ser lido
@@ -228,8 +229,6 @@ int main(int argc, char *argv[])
            }
 
         }
-        */
-
     }
     fclose(arq);
 
@@ -348,7 +347,9 @@ void tirarZeros(int numLinhas, int numColunas, float matriz[numLinhas][numColuna
 }
 */
 
-void tirarZeros (int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
+
+// retorna se deu ou não para tirar os zeros da diagonal
+int tirarZeros (int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
 {
     int indices[numColunas]; // formamos um vetor com os indices da matriz
     for (int i = 0; i < numColunas; i++)
@@ -359,10 +360,31 @@ void tirarZeros (int numLinhas, int numColunas, float matriz[numLinhas][numColun
     int qtasCombinacoes = fatorial(numColunas);
     int permutacoes[qtasCombinacoes][numColunas];
 
-    permuta(qtasCombinacoes, numColunas, 0, numColunas, permutacoes);
+    permuta(qtasCombinacoes, numColunas, indices, 0, numColunas, permutacoes);
 
+    // copiamos a matriz para uma outra matriz, onde vamos testando diferentes combinações
     float matrizTeste[numLinhas][numColunas];
-    for (int i = 0; i < numLinhas; i++)
+    for (int linha = 0; linha < numLinhas; linha++)
+    {
+        for (int coluna = 0; coluna < numColunas; coluna++)
+            matrizTeste[linha][coluna] = matriz[linha][coluna];
+    }
+
+    for (int i = 0; i < qtasCombinacoes; i++)
+    {
+        int combinacao[numColunas] = permutacoes[i];
+
+        for (int pos = 0; pos < numColunas; pos++)
+        {
+            int indiceLinha = combinacao[pos];
+            for (int i = 0; i < numColunas; i++)
+            {
+
+            }
+            matrizTeste[pos][] = matriz[indiceLinha][];
+            printf("testando sla");
+        }
+    }
 }
 
 void trocarColunas(int a, int b, int numLinhas, int numColunas, float matriz[numLinhas][numColunas])
